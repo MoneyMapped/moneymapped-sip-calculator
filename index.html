@@ -2,29 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SIP Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <button id="theme-toggle">🌙 Dark Mode</button>
+
   <div class="container">
-    <h1>SIP Calculator</h1>
-    <div class="form">
-      <label>Monthly Investment (₹)</label>
-      <input type="number" id="investment" placeholder="e.g. 5000" />
+    <h1 id="title">SIP Calculator</h1>
+    <form id="sip-form">
+      <label for="monthlyInvestment">Monthly Investment (₹)</label>
+      <input type="number" id="monthlyInvestment" required inputmode="numeric" />
 
-      <label>Expected Annual Return (%)</label>
-      <input type="number" id="rate" placeholder="e.g. 12" />
+      <label for="annualReturn">Expected Annual Return (%)</label>
+      <input type="number" id="annualReturn" required inputmode="numeric" />
 
-      <label>Time Period (Years)</label>
-      <input type="number" id="time" placeholder="e.g. 20" />
+      <label for="years">Investment Duration (Years)</label>
+      <input type="number" id="years" required inputmode="numeric" />
 
-      <button onclick="calculateSIP()">Calculate</button>
+      <button type="submit">Calculate</button>
+    </form>
 
-      <div class="result" id="result"></div>
+    <div class="results">
+      <p id="invested">Invested Amount: ₹0</p>
+      <p id="returns">Estimated Returns: ₹0</p>
+      <p id="total">Total Value: ₹0</p>
     </div>
   </div>
+
+  <div class="chart-container">
+    <canvas id="sipChart"></canvas>
+  </div>
+
+  <footer>
+    Made with 💸 by <span>MoneyMapped</span>
+  </footer>
 
   <script src="script.js"></script>
 </body>
