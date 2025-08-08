@@ -447,5 +447,20 @@ input[type=number], input[type=text] {
   }
 }
 
-    
-
+/* Consistent input styling with visible outlines */
+input[type="number"], input[type="text"] {
+    border: 1px solid rgba(100, 100, 100, 0.3);
+    border-radius: 6px;
+    padding: 10px;
+    transition: box-shadow 0.2s ease, border 0.2s ease;
+    width: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  input[type="number"]:focus, input[type="text"]:focus {
+    outline: none;
+    border: 1px solid #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);
+  }
+  
