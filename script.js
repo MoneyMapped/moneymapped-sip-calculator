@@ -5,6 +5,7 @@ const totalDisplay = document.getElementById('total');
 const ctx = document.getElementById('sipChart').getContext('2d');
 const themeToggle = document.getElementById('theme-toggle');
 let sipChart;
+let autoUpdateEnabled = false;
 
 function formatINR(num) {
   return '₹' + Math.round(num).toLocaleString('en-IN');
@@ -14,17 +15,24 @@ function calculateAndRenderChart() {
   const monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value);
   const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100;
   const years = parseFloat(document.getElementById('years').value);
+  const stepUpPercent = parseFloat(document.getElementById('stepUp')?.value) || 0;
 
   if (isNaN(monthlyInvestment) || isNaN(annualReturn) || isNaN(years)) return;
 
   const months = years * 12;
   const monthlyRate = annualReturn / 12;
 
-  let investedAmount = monthlyInvestment * months;
+  let investedAmount = 0;
   let futureValue = 0;
+  let currentMonthlyInvestment = monthlyInvestment;
 
   for (let i = 1; i <= months; i++) {
-    futureValue = (futureValue + monthlyInvestment) * (1 + monthlyRate);
+    futureValue = (futureValue + currentMonthlyInvestment) * (1 + monthlyRate);
+    investedAmount += currentMonthlyInvestment;
+
+    if (i % 12 === 0) {
+      currentMonthlyInvestment *= 1 + (stepUpPercent / 100);
+    }
   }
 
   const estimatedReturns = futureValue - investedAmount;
@@ -36,14 +44,21 @@ function calculateAndRenderChart() {
   const labels = [];
   const investedData = [];
   const totalData = [];
-  let totalSoFar = 0;
+  currentMonthlyInvestment = monthlyInvestment;
 
   for (let year = 1; year <= years; year++) {
-    let investedSoFar = monthlyInvestment * 12 * year;
-    totalSoFar = 0;
+    let investedSoFar = 0;
+    let totalSoFar = 0;
+    currentMonthlyInvestment = monthlyInvestment;
+
     for (let i = 1; i <= year * 12; i++) {
-      totalSoFar = (totalSoFar + monthlyInvestment) * (1 + monthlyRate);
+      totalSoFar = (totalSoFar + currentMonthlyInvestment) * (1 + monthlyRate);
+      investedSoFar += currentMonthlyInvestment;
+      if (i % 12 === 0) {
+        currentMonthlyInvestment *= 1 + (stepUpPercent / 100);
+      }
     }
+
     labels.push(year);
     investedData.push(investedSoFar);
     totalData.push(totalSoFar);
@@ -118,17 +133,39 @@ function calculateAndRenderChart() {
   });
 }
 
-// Form submit handler
+// Submit button triggers calculation & enables auto update
 form.addEventListener('submit', function (e) {
   e.preventDefault();
   calculateAndRenderChart();
+  autoUpdateEnabled = true;
 });
 
-// Dark mode toggle
+// Auto-calculate on input change after first submit
+document.querySelectorAll('#monthlyInvestment, #annualReturn, #years, #stepUp').forEach(input => {
+  input.addEventListener('input', () => {
+    if (autoUpdateEnabled) {
+      calculateAndRenderChart();
+    }
+  });
+});
+
+// Dark mode toggle with persistence
 themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
-  themeToggle.textContent = document.body.classList.contains('dark-mode')
-    ? '☀️ Light Mode'
-    : '🌙 Dark Mode';
-  calculateAndRenderChart(); // Re-render chart with new theme colors
+  const isDarkMode = document.body.classList.contains('dark-mode');
+  themeToggle.textContent = isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode';
+  localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+  calculateAndRenderChart(); // Re-render chart with new theme
+});
+
+// Load dark mode preference on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const darkModeSetting = localStorage.getItem('darkMode');
+  if (darkModeSetting === 'enabled') {
+    document.body.classList.add('dark-mode');
+    themeToggle.textContent = '☀️ Light Mode';
+  } else {
+    document.body.classList.remove('dark-mode');
+    themeToggle.textContent = '🌙 Dark Mode';
+  }
 });
