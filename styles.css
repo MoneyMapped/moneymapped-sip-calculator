@@ -1,63 +1,166 @@
 body {
-  font-family: 'Inter', sans-serif;
-  background: #f7f9fc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
-}
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e6f4ea;
+    color: #222;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .container {
+    background-color: #ffffff;
+    max-width: 500px;
+    margin: 3rem auto 1rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #2e7d32;
+  }
+  
+  form label {
+    display: block;
+    margin: 1rem 0 0.5rem;
+    font-weight: 500;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    appearance: textfield;
+  }
+  
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  form button {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #1b5e20;
+  }
+  
+  .results {
+    margin-top: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .chart-container {
+    max-width: 50%;
+    height: 400px;
+    margin: 2rem auto;
+  }
+  
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  footer {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  footer span {
+    color: #2e7d32;
+  }
+  
+  #theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: #c8e6c9;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  #theme-toggle:hover {
+    background-color: #a5d6a7;
+  }
+  
+  /* Dark mode */
+  body.dark-mode {
+    background-color: #1b1f1d;
+    color: #f1f1f1;
+  }
+  
+  body.dark-mode .container {
+    background-color: #26332f;
+  }
+  
+  body.dark-mode form input,
+  body.dark-mode form button {
+    color: #fff;
+  }
+  
+  body.dark-mode form label {
+    color: #fff;
+  }
+  
+  body.dark-mode h1 {
+    color: #81c784;
+  }
+  
+  body.dark-mode footer {
+    color: #ccc;
+  }
+  
+  body.dark-mode footer span {
+    color: #81c784;
+  }
+  
+  body.dark-mode #theme-toggle {
+    background-color: #4caf50;
+    color: white;
+  }
 
-.container {
-  background: white;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  max-width: 400px;
-  width: 100%;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #1e1e2f;
-}
-
-.form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.form input {
-  width: 100%;
-  padding: 0.7rem;
-  margin-bottom: 1.2rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-button {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background-color: #0059c1;
-}
-
-.result {
-  margin-top: 1.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #2d3748;
-}
+/* Input fields text in dark mode */
+body.dark-mode input {
+    background-color: #37463f;
+    color: #ffffff;
+    border: 1px solid #666;
+  }
+  
+  /* Calculated result texts (like Invested Amount, etc.) */
+  body.dark-mode .results p {
+    color: #ffffff;
+  }
+  
+  /* Graph labels and axes in dark mode */
+  body.dark-mode canvas {
+    background-color: #1f1f1f;
+  }
+  
+  body.dark-mode .chart-container {
+    color: #ffffff;
+  }
+    
+  
