@@ -202,5 +202,20 @@ body.dark-mode input {
       margin-bottom: 1.5rem;
     }
   }
+  @media (max-width: 600px) {
+    #theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 1.5rem;
+    }
+  
+    .container {
+      margin-top: 4rem; /* Adds breathing space so toggle doesn’t overlap content */
+    }
+  }
   
   
