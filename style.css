@@ -401,5 +401,51 @@ body.dark-mode input[type=number] {
     --input-text: #eee;
     --label-text: #ccc;
   }
+
+  /* Remove number input arrows for all browsers */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Match number inputs style to others */
+input[type=number], input[type=text] {
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  background: var(--input-bg);
+  color: var(--text-color);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Better spacing for Step-up field */
+.stepup-container {
+  margin-bottom: 15px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+  .form-group {
+    margin-bottom: 14px;
+  }
+  .chart-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
     
-      
+
