@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIP / SWP Calculator</title>
+  <title>SIP / SWP / Lump Sum / Goal Calculator</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -14,9 +14,11 @@
     <h1 id="title">SIP Calculator</h1>
 
     <!-- Toggle Tabs -->
-    <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
-      <button type="button" id="sipTab" style="padding: 0.6rem 1.2rem; border-radius: 6px; background-color: #2e7d32; color: white; border: none; cursor: pointer;">SIP</button>
-      <button type="button" id="swpTab" style="padding: 0.6rem 1.2rem; border-radius: 6px; background-color: #ccc; color: #333; border: none; cursor: pointer;">SWP</button>
+    <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+      <button type="button" class="tab-btn" id="sipTab">SIP</button>
+      <button type="button" class="tab-btn" id="swpTab">SWP</button>
+      <button type="button" class="tab-btn" id="lumpSumTab">Lump Sum</button>
+      <button type="button" class="tab-btn" id="goalTab">Goal</button>
     </div>
 
     <!-- SIP Form -->
@@ -38,7 +40,7 @@
       <button type="submit">Calculate</button>
     </form>
 
-    <!-- SWP Form (Hidden initially) -->
+    <!-- SWP Form -->
     <form id="swp-form" style="display:none;">
       <label for="initialInvestment">Initial Investment (₹)</label>
       <input type="number" id="initialInvestment" required min="1" />
@@ -51,6 +53,34 @@
 
       <label for="swpYears">Withdrawal Duration (Years)</label>
       <input type="number" id="swpYears" required min="1" />
+
+      <button type="submit">Calculate</button>
+    </form>
+
+    <!-- Lump Sum Form -->
+    <form id="lumpsum-form" style="display:none;">
+      <label for="lumpSumAmount">One-Time Investment (₹)</label>
+      <input type="number" id="lumpSumAmount" required min="1" />
+
+      <label for="lumpSumAnnualReturn">Expected Annual Return (%)</label>
+      <input type="number" id="lumpSumAnnualReturn" required min="0" step="0.01" />
+
+      <label for="lumpSumYears">Investment Duration (Years)</label>
+      <input type="number" id="lumpSumYears" required min="1" />
+
+      <button type="submit">Calculate</button>
+    </form>
+
+    <!-- Goal Form -->
+    <form id="goal-form" style="display:none;">
+      <label for="goalAmount">Target Amount (₹)</label>
+      <input type="number" id="goalAmount" required min="1" />
+
+      <label for="goalAnnualReturn">Expected Annual Return (%)</label>
+      <input type="number" id="goalAnnualReturn" required min="0" step="0.01" />
+
+      <label for="goalYears">Time to Reach Goal (Years)</label>
+      <input type="number" id="goalYears" required min="1" />
 
       <button type="submit">Calculate</button>
     </form>
